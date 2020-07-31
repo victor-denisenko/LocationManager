@@ -11,6 +11,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.yayandroid.locationmanager.helper.continuoustask.ContinuousTask;
 import com.yayandroid.locationmanager.helper.continuoustask.ContinuousTask.ContinuousTaskRunner;
 import com.yayandroid.locationmanager.listener.FallbackListener;
+import com.yayandroid.locationmanager.providers.dialogprovider.GoogleApiErrorDialogProvider;
 
 class DispatcherLocationSource {
 
@@ -46,8 +47,7 @@ class DispatcherLocationSource {
     @Nullable Dialog getGoogleApiErrorDialog(Activity activity, int gpServicesAvailability, int requestCode,
           OnCancelListener onCancelListener) {
         if (activity == null) return null;
-        return GoogleApiAvailability.getInstance()
-              .getErrorDialog(activity, gpServicesAvailability, requestCode, onCancelListener);
+        return GoogleApiErrorDialogProvider.getErrorDialog(activity, GoogleApiAvailability.getInstance(), gpServicesAvailability, requestCode, onCancelListener);
     }
 
 }
